@@ -1,0 +1,3 @@
+#!/usr/bin/with-contenv sh
+
+/usr/bin/transmission-daemon --config-dir $TRANSMISSION_CONF_DIR -f --log-error
