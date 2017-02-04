@@ -4,6 +4,8 @@
 import os
 import sys
 import requests
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 try:
         TG_API_URL = sys.argv[1]
@@ -40,6 +42,7 @@ class NotifierSender(object):
                 self.status_message = r.content
         else:
             self.status_message = r.content
+
 
 if __name__ == '__main__':
     text = 'Torrent complete: {}.'.format(os.getenv('TR_TORRENT_NAME'))
