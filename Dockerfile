@@ -7,8 +7,9 @@ ENV TRANSMISSION_CONF_DIR /etc/transmission
 COPY rootfs /
 
 # Install transmission and pushnotify
-RUN apk --update add \
-    transmission-daemon \
+RUN echo '@edge http://nl.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories && \
+    apk --update add \
+    transmission-daemon@edge \
     python \
     py-pip \
     && pip install --upgrade pip \
