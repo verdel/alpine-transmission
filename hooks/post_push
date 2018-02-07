@@ -1,3 +1,0 @@
-#!/bin/bash
-
-curl http://444802b8169a.sn.mynetname.net:8090/v1-webhooks/endpoint?key=CpkdJmsz21CZM4ewEvkGqGDYRHEcAN5OcGyj1irV&projectId=1a308
