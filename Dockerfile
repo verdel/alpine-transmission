@@ -1,19 +1,27 @@
-FROM verdel/alpine-base:latest
-MAINTAINER Vadim Aleksandrov <valeksandrov@me.com>
+FROM alpine:latest
 
 ENV TRANSMISSION_CONF_DIR /etc/transmission
 
 # Copy init scripts
 COPY rootfs /
 
-# Install transmission and pushnotify
-RUN echo '@edge http://nl.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories && \
+# Add s6-overlay
+ENV S6_OVERLAY_VERSION v2.1.0.2
+
+# Install transmission
+RUN echo '@edge http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories && \
     apk --update add \
     transmission-daemon@edge \
-    python \
+    python3 \
     py-pip \
+    tzdata \
+    && apk --update add --virtual build-dependencies ca-certificates git curl \
     && pip install --upgrade pip \
     && pip install requests \
+    && update-ca-certificates \
+    && curl -sSL https://github.com/just-containers/s6-overlay/releases/download/${S6_OVERLAY_VERSION}/s6-overlay-amd64.tar.gz \
+    | tar xvfz - -C /  \
+    && apk del build-dependencies \
     # Clean up
     && rm -rf \
     /usr/share/man \
@@ -23,3 +31,6 @@ RUN echo '@edge http://nl.alpinelinux.org/alpine/edge/main' >> /etc/apk/reposito
 # Expose ports
 EXPOSE 9091/tcp
 EXPOSE 51413/tcp
+
+ENTRYPOINT ["/init"]
+CMD []
