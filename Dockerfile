@@ -18,6 +18,7 @@ RUN echo '@edge http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repo
     && update-ca-certificates \
     && curl -sSL https://github.com/just-containers/s6-overlay/releases/download/${S6_OVERLAY_VERSION}/s6-overlay-amd64.tar.gz \
     | tar xvfz - -C /  \
+    && chmod +x /usr/bin/telegram_notification.py \
     && apk del build-dependencies \
     # Clean up
     && rm -rf \

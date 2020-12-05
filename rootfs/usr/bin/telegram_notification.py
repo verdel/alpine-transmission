@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 import os
@@ -8,14 +8,14 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 try:
-        TG_API_URL = sys.argv[1]
+    TG_API_URL = sys.argv[1]
 except:
-        TG_API_URL = os.getenv('TG_API_URL')
+    TG_API_URL = os.getenv('TG_API_URL')
 
 try:
-        TG_API_KEY = sys.argv[2]
+    TG_API_KEY = sys.argv[2]
 except:
-        TG_API_KEY = os.getenv('TG_API_KEY')
+    TG_API_KEY = os.getenv('TG_API_KEY')
 
 
 class NotifierSender(object):
