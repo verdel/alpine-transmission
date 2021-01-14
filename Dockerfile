@@ -13,9 +13,9 @@ RUN echo '@edge http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repo
     apk --update add \
     transmission-daemon@edge \
     tzdata \
-    && apk --update add --virtual build-dependencies ca-certificates curl \
-    && pip install requests \
-    && update-ca-certificates \
+    && apk --update add --virtual build-dependencies curl openssl-dev libffi-dev \
+    && pip install --upgrade pip \
+    && pip install j2cli telegram-send \
     && curl -sSL https://github.com/just-containers/s6-overlay/releases/download/${S6_OVERLAY_VERSION}/s6-overlay-amd64.tar.gz \
     | tar xvfz - -C /  \
     && chmod +x /usr/bin/telegram_notification.py \
